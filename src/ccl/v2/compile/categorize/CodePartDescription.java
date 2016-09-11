@@ -40,7 +40,7 @@ public class CodePartDescription {
 	}
 
 	public CodeSnippet makeSnippet() throws CclCompileException {
-		if(!isBlock()) throw new CclCompileException("This code part is not a snippet (compile error)!");
+		if(!isSnippet()) throw new CclCompileException("This code part is not a snippet (compile error)!");
 		return new CodeSnippet(code);
 	}
 

@@ -19,7 +19,7 @@ public class CodeCompilerBase {
 	}
 
 	public static String compileSnippet(CodeSnippet snippet) throws CclCompileException {
-		throw new CclCompileException("NI");
+		return SnippetCompileRoutinePool.use(snippet);
 	}
 
 }
