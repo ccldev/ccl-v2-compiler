@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class CodeBlock {
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile
-			("\\s*(.*)\\s*\\{\\s*(.+)\\s*\\}\\s*", Pattern.DOTALL);
+			("\\s*(.*)\\s*\\{\\s*(.*)\\s*\\}\\s*", Pattern.DOTALL);
 	
 	private Matcher matcher;
 	

@@ -64,6 +64,7 @@ public class CodePartReadState {
 	}
 	private void finish() {
 		finished = (depth == 0) && !unescape && !unfinished && !inString;
+		if(depth < 0) unfinished = true;
 	}
 	
 	@Override
