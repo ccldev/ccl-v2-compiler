@@ -5,12 +5,12 @@ import java.util.regex.Pattern;
 
 public enum ValueType {
 	
-	NATIVE("\\(", "\\)"),
+	NATIVE("\\(([a-zA-Z0-9\\.]+)\\)(.*)"),
 	STRING("\"", "\""),
 	FLOAT("(\\d+\\.\\d+)"),
 	INT("(\\d+)", FLOAT),
 	VARIABLE("[a-z]+"),
-	ARRAY("[", "]");
+	ARRAY("\\[", "\\]");
 	
 	private Pattern pattern;
 	private ValueType[] betterTypes;
@@ -27,7 +27,7 @@ public enum ValueType {
 	
 	public ValueType getMatch(String val){
 		Matcher m = pattern.matcher(val);
-		if(m.find()){
+		if(m.matches()){
 			for(int i = 0; i < betterTypes.length; i++){
 				ValueType betterMatch = betterTypes[i].getMatch(val);
 				if(betterMatch != null) return betterMatch.getMatch(val);
@@ -35,6 +35,12 @@ public enum ValueType {
 			return this;
 		}
 		return null;
+	}
+	
+	public Matcher matcher(String val){
+		Matcher m = pattern.matcher(val);
+		if(!m.matches()) throw new RuntimeException("Variable type" + this + " does not match with \n" + val);
+		return m;
 	}
 	
 }

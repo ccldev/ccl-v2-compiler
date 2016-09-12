@@ -1,10 +1,13 @@
 package ccl.v2.routine.impl.value;
 
+import java.util.regex.Matcher;
+
 public class ValueRepresentation {
 	
 	private String raw;
 	private int layer;
 	private ValueType type;
+	private Matcher matcher;
 	
 	public static ValueRepresentation make(String raw){
 		return new ValueRepresentation(raw, 0);
@@ -18,7 +21,7 @@ public class ValueRepresentation {
 
 	private void analyze() {
 		type = computeType();
-		System.out.println(type);
+		this.matcher = type.matcher(raw);
 	}
 	
 	private ValueType computeType() {
@@ -40,6 +43,22 @@ public class ValueRepresentation {
 	public String toString() {
 		return "ValueRepresentation [raw=" + raw + ", layer=" + layer
 				+ ", type=" + type + "]";
+	}
+	
+	public CompiledValue compile(){
+		return ValueCompiler.compile(this);
+	}
+
+	public String getRaw() {
+		return raw;
+	}
+
+	public int getLayer() {
+		return layer;
+	}
+
+	public ValueType getType() {
+		return type;
 	}
 
 }
