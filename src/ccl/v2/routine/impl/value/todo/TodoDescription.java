@@ -14,7 +14,6 @@ public class TodoDescription {
 
 	private void analyze() {
 		type = computeType();
-		this.hierarchy = new TodoHierarchy(raw);
 	}
 	
 	private TodoType computeType(){
@@ -27,8 +26,11 @@ public class TodoDescription {
 	}
 
 	public TodoResult compile(int layer, String compiledBase) {
-		// TODO Auto-generated method stub
-		return null;
+		TodoElements elements = new TodoElements();
+		for(int i = 0; i < raw.length(); i++){
+			elements.feed(raw.charAt(i));
+		}
+		return elements.compile(layer);
 	}
 
 }
