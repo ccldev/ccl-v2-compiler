@@ -8,6 +8,8 @@ public class ValueRepresentation {
 	private int layer;
 	private ValueType type;
 	private Matcher matcher;
+	private String baseValue;
+	private String todo;
 	
 	public static ValueRepresentation make(String raw){
 		return new ValueRepresentation(raw, 0);
@@ -22,6 +24,13 @@ public class ValueRepresentation {
 	private void analyze() {
 		type = computeType();
 		this.matcher = type.matcher(raw);
+		this.baseValue = matcher.group(1);
+		if(matcher.groupCount() == 2){
+			this.todo = matcher.group(2);
+		}
+		if(matcher.groupCount() <= 0 || matcher.groupCount() >= 3){
+			throw new RuntimeException("Group count should be 1 or 2! (compile error) Matcher: \n" + matcher);
+		}
 	}
 	
 	private ValueType computeType() {
@@ -59,6 +68,14 @@ public class ValueRepresentation {
 
 	public ValueType getType() {
 		return type;
+	}
+
+	public String getBaseValue() {
+		return baseValue;
+	}
+
+	public String getTodo() {
+		return todo;
 	}
 
 }

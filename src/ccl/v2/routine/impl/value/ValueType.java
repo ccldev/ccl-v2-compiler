@@ -9,7 +9,7 @@ public enum ValueType {
 	STRING("\"", "\""),
 	FLOAT("(\\d+\\.\\d+)"),
 	INT("(\\d+)", FLOAT),
-	VARIABLE("[a-z]+"),
+	VARIABLE("([a-zA-Z]+[a-zA-Z0-9]*)(.*)"),
 	ARRAY("\\[", "\\]");
 	
 	private Pattern pattern;
