@@ -2,6 +2,8 @@ package ccl.v2.routine.impl.value.base;
 
 import ccl.iface.debug.Logger;
 import ccl.v2.routine.impl.value.ValueRepresentation;
+import ccl.v2.routine.impl.value.todo.TodoCompiler;
+import ccl.v2.routine.impl.value.todo.TodoResult;
 
 public class CompiledNativeValue extends AbstractCompiledValue {
 
@@ -11,20 +13,12 @@ public class CompiledNativeValue extends AbstractCompiledValue {
 
 	@Override
 	protected String compileBase(String base) {
-		Logger.out.log(this, "TODO: implement compileBase(String)");
-		return "";
+		return "N" + base;
 	}
 
 	@Override
-	protected String compileTodo(String todo) {
-		Logger.out.log(this, "TODO: implement compileTodo(String)");
-		return "";
-	}
-
-	@Override
-	protected String beforeTodo(String todo) {
-		Logger.out.log(this, "TODO: implement beforeTodo(String)");
-		return "";
+	protected TodoResult compileTodo(String compiledBase, String todo) {
+		return TodoCompiler.compileTodo(value.getLayer(), compiledBase, todo);
 	}
 
 	@Override
