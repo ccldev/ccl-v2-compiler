@@ -7,6 +7,7 @@ public class TodoElement {
 	private StringBuilder builder;
 	private ArrayList<TodoElement> children;
 	private TodoElement parent;
+	private TodoDescription description;
 	
 	public static TodoElement make(){
 		return new TodoElement(null);
@@ -41,4 +42,21 @@ public class TodoElement {
 		return "TodoElement [builder=" + builder + ", children=" + children + "]";
 	}
 
+	private void analyze() {
+		description = new TodoDescription(builder.toString());
+	}
+
+	public TodoDescription getDescription() {
+		if(description == null) analyze();
+		return description;
+	}
+	
+	public String getRaw(){
+		return builder.toString().trim();
+	}
+
+	public ArrayList<TodoElement> getChildren() {
+		return children;
+	}
+	
 }

@@ -21,7 +21,7 @@ public class TodoDescription {
 		switch(start){
 		case '(': return TodoType.INVOKE;
 		case '.': return TodoType.GET;
-		default: throw new RuntimeException("Unknown todo type identifier " + start);
+		default: throw new UnknownTodoTypeException("Unknown todo type identifier " + start);
 		}
 	}
 
@@ -31,6 +31,14 @@ public class TodoDescription {
 			elements.feed(raw.charAt(i));
 		}
 		return elements.compile(layer);
+	}
+
+	public String getRaw() {
+		return raw;
+	}
+
+	public TodoType getType() {
+		return type;
 	}
 
 }

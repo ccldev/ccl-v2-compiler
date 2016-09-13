@@ -2,6 +2,8 @@ package ccl.v2.routine.impl.value.todo;
 
 import java.util.ArrayList;
 
+import ccl.iface.debug.Logger;
+
 public class TodoElements extends ArrayList<TodoElement>{
 	
 	private static final long serialVersionUID = -6378135168184486211L;
@@ -15,6 +17,7 @@ public class TodoElements extends ArrayList<TodoElement>{
 	}
 	
 	public void feed(char next){
+		Logger.out.log(this, (char) next + " " + current);
 		if(unescape){
 			current.feed(next);
 			unescape = false;
@@ -38,7 +41,7 @@ public class TodoElements extends ArrayList<TodoElement>{
 				add(current);
 			}
 		}
-		current = TodoElement.make();
+		current = current.child();
 	}
 
 	public TodoResult compile(int layer) {
@@ -46,7 +49,11 @@ public class TodoElements extends ArrayList<TodoElement>{
 			closeElement();
 			current = null;
 		}
-		throw new RuntimeException("NI " + this);
+		TodoResultBuilder resBuilder = new TodoResultBuilder();
+		for(int i = 0; i < size(); i++){
+			resBuilder.append(get(i), layer);
+		}
+		return resBuilder.make();
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public enum ValueType {
 	
-	NATIVE("\\(([a-zA-Z0-9\\.]+)\\)(.*)"),
+	NATIVE("\\$([a-zA-Z0-9\\.]+)\\$(.*)"),
 	STRING("\"", "\""),
 	FLOAT("(\\d+\\.\\d+)"),
 	INT("(\\d+)", FLOAT),

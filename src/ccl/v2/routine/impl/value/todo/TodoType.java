@@ -13,8 +13,12 @@ public enum TodoType {
 		this.indexNeeded = needsIndex;
 	}
 
-	public char getIdentifier() {
-		return identifier;
+	public String getIdentifier(int layer) {
+		if(indexNeeded){
+			return identifier + "" + (char) layer;
+		}else{
+			return "" + (char) layer;
+		}
 	}
 
 	public boolean isIndexNeeded() {

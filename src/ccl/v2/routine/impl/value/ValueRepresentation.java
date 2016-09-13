@@ -15,12 +15,17 @@ public class ValueRepresentation {
 		return new ValueRepresentation(raw, 0);
 	}
 	
-	private ValueRepresentation(String raw, int layer){
+	/**
+	 * Only use if you EXACTLY know what you are doing!
+	 * @param raw
+	 * @param layer
+	 */
+	public ValueRepresentation(String raw, int layer){
 		this.raw = raw;
 		this.layer = layer;
 		analyze();
 	}
-
+	
 	private void analyze() {
 		type = computeType();
 		this.matcher = type.matcher(raw);

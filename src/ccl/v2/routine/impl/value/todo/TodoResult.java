@@ -24,5 +24,10 @@ public class TodoResult {
 	public void setBefore(String before) {
 		this.before = before;
 	}
+	@Override
+	public String toString() {
+		return "TodoResult [first=" + first + ", last=" + last + ", before="
+				+ before + "]";
+	}
 	
 }
