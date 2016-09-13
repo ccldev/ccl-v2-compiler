@@ -22,7 +22,9 @@ public class TodoResultBuilder {
 	public void append(TodoElement todoElement, int layer) {		
 		Logger.err.log(this, todoElement + "");
 		if(todoElement.getRaw().trim().length() == 0){
-			Logger.out.log(this, "Empty todo element.");
+			if(todoElement.parent() != null){
+				first.add(TodoType.INVOKE.getIdentifier(layer));
+			}
 			return;
 		}
 		try{
@@ -35,7 +37,7 @@ public class TodoResultBuilder {
 			}
 			append(todoElement.getChildren().get(0), layer + 1);
 		}catch(UnknownTodoTypeException e){
-			e.printStackTrace();
+			first.add(TodoType.INVOKE.getIdentifier(layer));
 			CompiledValue[] values = makeValues(todoElement.getRaw());
 			for(int i = 0; i < values.length; i++){
 				CompiledValue val = values[i];
@@ -53,7 +55,7 @@ public class TodoResultBuilder {
 		Logger.out.log(this, first + "");
 		TodoResult res = new TodoResult();
 		res.setLast(lastBuilder.toString());
-		res.setFirst(reverse(before));
+		res.setFirst(reverse(first));
 		res.setBefore(reverse(before));
 		return res;
 	}

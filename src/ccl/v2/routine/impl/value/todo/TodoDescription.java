@@ -41,4 +41,9 @@ public class TodoDescription {
 		return type;
 	}
 
+	@Override
+	public String toString() {
+		return "TodoDescription [raw=" + raw + ", type=" + type + "]";
+	}
+
 }

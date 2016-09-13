@@ -37,11 +37,6 @@ public class TodoElement {
 		return parent;
 	}
 
-	@Override
-	public String toString() {
-		return "TodoElement [builder=" + builder + ", children=" + children + "]";
-	}
-
 	private void analyze() {
 		description = new TodoDescription(builder.toString());
 	}
@@ -57,6 +52,11 @@ public class TodoElement {
 
 	public ArrayList<TodoElement> getChildren() {
 		return children;
+	}
+
+	@Override
+	public String toString() {
+		return "TodoElement [builder=" + builder + ", parent=" + parent + ", description=" + description + "]";
 	}
 	
 }
