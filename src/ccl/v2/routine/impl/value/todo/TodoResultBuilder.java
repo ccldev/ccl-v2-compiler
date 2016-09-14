@@ -32,13 +32,13 @@ public class TodoResultBuilder {
 			Logger.out.log(this, type + "");
 			first.add(type.getIdentifier(layer));
 			switch(type){
-			case GET: lastBuilder.append(todoElement.getRaw().replaceAll("\\.", "|" + (char) + layer)); break;
+			case GET: lastBuilder.append(todoElement.getRaw().replaceAll("\\.", "|" + /*(char) + */layer)); break;
 			default: throw new RuntimeException("Unexpected todo type " + type);
 			}
-			append(todoElement.getChildren().get(0), layer + 1);
+			append(todoElement.getChildren().get(0), layer);
 		}catch(UnknownTodoTypeException e){
 			first.add(TodoType.INVOKE.getIdentifier(layer));
-			CompiledValue[] values = makeValues(todoElement.getRaw());
+			CompiledValue[] values = makeValues(todoElement.getRaw(), layer + 1);
 			for(int i = 0; i < values.length; i++){
 				CompiledValue val = values[i];
 				before.add(val.getBefore());
@@ -47,7 +47,7 @@ public class TodoResultBuilder {
 		}
 	}
 
-	private CompiledValue[] makeValues(String raw) {
+	private CompiledValue[] makeValues(String raw, int layer) {
 		throw new RuntimeException("NI");
 	}
 

@@ -15,7 +15,7 @@ public enum TodoType {
 
 	public String getIdentifier(int layer) {
 		if(indexNeeded){
-			return identifier + "" + (char) layer;
+			return identifier + "" + /*(char) */layer;
 		}else{
 			return "" + (char) layer;
 		}
